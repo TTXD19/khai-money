@@ -4,7 +4,7 @@ import {ItemContentProps} from "@/app/data/ItemContentProps";
 
 export default function ItemContent({date, type, amount, itemCategory, desc}: ItemContentProps) {
     return (
-        <div className="flex justify-center gap-9">
+        <div className="flex justify-between gap-9">
             <SingleItemStyle text={DateUtils.formatDate(date)}/>
             <SingleItemStyle text={type}/>
             <SingleItemStyle text={amount}/>
