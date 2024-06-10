@@ -1,4 +1,4 @@
-import ItemContent from "@/component/result/item_content";
+import ItemContent from "@/app/component/result/item_content";
 
 
 export default function Page() {

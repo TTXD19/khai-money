@@ -1,6 +1,6 @@
-import ItemHeader from "@/component/result/item_header";
-import ItemContent from "@/component/result/item_content";
-import {fetchSpendingList} from "@/data/result/Result";
+import ItemHeader from "@/app/component/result/item_header";
+import ItemContent from "@/app/component/result/item_content";
+import {fetchSpendingList} from "@/app/data/result/Result";
 
 
 export default function Page() {

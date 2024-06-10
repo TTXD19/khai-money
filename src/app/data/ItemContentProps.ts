@@ -1,4 +1,4 @@
-import {TransactionType} from "@/data/TransactionType";
+import {TransactionType} from "@/app/data/TransactionType";
 
 export interface ItemContentProps {
     date: Date;

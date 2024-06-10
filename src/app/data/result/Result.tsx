@@ -1,5 +1,5 @@
-import {ItemContentProps} from "@/data/ItemContentProps";
-import {TransactionType} from "@/data/TransactionType";
+import {ItemContentProps} from "@/app/data/ItemContentProps";
+import {TransactionType} from "@/app/data/TransactionType";
 
 export function fetchSpendingList(): ItemContentProps[] {
     return [
