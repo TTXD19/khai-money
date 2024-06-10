@@ -8,9 +8,9 @@ export default function Page() {
     const spending = fetchSpendingList()
 
     return (
-        <div className="flex justify-center">
-            <div className="flex w-1/2 flex-col mt-32">
-                <div className="mt-14">
+        <div className="flex justify-center mt-12">
+            <div className="flex w-1/2 flex-col">
+                <div className="mt-0">
                     <span className="text-black text-4xl font-black">今日已花費：2000 元</span>
                 </div>
                 <div className="flex flex-col">
