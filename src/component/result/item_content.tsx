@@ -1,6 +1,6 @@
-import SingleItemStyle from "@/app/ui/result/items/SingleItemStyle";
+import SingleItemStyle from "@/component/result/items/SingleItemStyle";
 import DateUtils from "@/app/tools/DateUtils";
-import {ItemContentProps} from "@/app/data/ItemContentProps";
+import {ItemContentProps} from "@/data/ItemContentProps";
 
 export default function ItemContent({date, type, amount, itemCategory, desc}: ItemContentProps) {
     return (

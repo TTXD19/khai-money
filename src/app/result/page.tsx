@@ -1,33 +1,17 @@
-import ItemHeader from "@/app/ui/result/item_header";
-import ItemContent from "@/app/ui/result/item_content";
-import {TransactionType} from "@/app/data/TransactionType";
-import {ItemContentProps} from "@/app/data/ItemContentProps";
-import Link from "next/link";
+import ItemHeader from "@/component/result/item_header";
+import ItemContent from "@/component/result/item_content";
+import {fetchSpendingList} from "@/data/result/Result";
 
 
 export default function Page() {
 
-    const item: ItemContentProps = {
-        date: new Date(),
-        type: TransactionType.Expense,
-        amount: "1000",
-        itemCategory: "晚餐",
-        desc: "我的晚餐"
-    };
-
-    const item_2: ItemContentProps = {
-        date: new Date(),
-        type: TransactionType.Expense,
-        amount: "1000",
-        itemCategory: "晚餐",
-        desc: "因為 TypeScript 會從 0 開始"
-    };
+    const spending = fetchSpendingList()
 
     return (
         <div className="flex justify-center">
             <div className="flex w-1/2 flex-col mt-32">
                 <div className="mt-14">
-                    <h1 className="text-black text-4xl font-black">今日已花費：2000 元</h1>
+                    <span className="text-black text-4xl font-black">今日已花費：2000 元</span>
                 </div>
                 <div className="flex flex-col">
                     <div className="mt-14">
@@ -41,11 +25,9 @@ export default function Page() {
                     </div>
                     <div className="mt-8">
                         <div className="flex flex-col gap-y-5">
-                            <ItemContent {...item} />
-                            <ItemContent {...item} />
-                            <ItemContent {...item_2} />
-                            <ItemContent {...item} />
-                            <ItemContent {...item} />
+                            {spending.map((spending) => (
+                                <ItemContent {...spending} />
+                            ))}
                         </div>
                     </div>
                     <div className="flex mt-8">
@@ -55,8 +37,14 @@ export default function Page() {
                         </button>
                     </div>
                 </div>
+                <div className="flex mt-32">
+                    <text className="w-max text-black text-4xl font-black">您的消費分析</text>
+                </div>
+                <div className="flex mt-6">
+                    <text className="text-black text-2xl font-black text-center">這份消費分析報告揭示了我們最新的市場趨勢和消費者行為。在過去的季度中，我們觀察到消費者對於健康和健身產品的需求持續增長。特別是在健康意識提高和生活方式改變的影響下，有機食品和天然成分的產品銷售顯著增加。
+此外，我們發現了線上購物的增長趨勢。由於數字化科技的普及，消費者更傾向於在線上平台上購物，這在特定產品類別中尤其明顯，例如家庭用品和日常必需品。</text>
+                </div>
             </div>
         </div>
-
     )
 }
