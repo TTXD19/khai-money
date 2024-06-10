@@ -1,3 +1,5 @@
 export default function SingleItemStyle({text}: { text: string }) {
-    return <text className="text-black text-xl font-semibold">{text}</text>
+    return <div className="w-40 max-h-14 flex items-center justify-center">
+        <span className="text-black text-xl font-semibold">{text}</span>
+    </div>
 }

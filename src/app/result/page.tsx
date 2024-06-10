@@ -24,7 +24,8 @@ export default function Page() {
                 <ItemHeader title="類別"/>
                 <ItemHeader title="內容"/>
             </div>
-            <div className="flex justify-center mt-14">
+            <div className="flex flex-col justify-center gap-6 mt-12">
+                <ItemContent {...item} />
                 <ItemContent {...item} />
             </div>
         </div>
