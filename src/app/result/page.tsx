@@ -24,10 +24,12 @@ export default function Page() {
     };
 
     return (
-        <div>
-            <h1 className="text-black mt-14 text-4xl">今日已花費：2000 元</h1>
-            <div className="flex justify-center">
-                <div className="w-1/2 flex flex-col">
+        <div className="flex justify-center">
+            <div className="flex w-1/2 flex-col mt-32">
+                <div className="mt-14">
+                    <h1 className="text-black text-4xl font-black">今日已花費：2000 元</h1>
+                </div>
+                <div className="flex flex-col">
                     <div className="mt-14">
                         <div className="flex flex-grow justify-between">
                             <ItemHeader title="日期"/>
