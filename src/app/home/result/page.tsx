@@ -9,7 +9,7 @@ export default function Page() {
 
     return (
         <div className="flex justify-center mt-12">
-            <div className="flex w-1/2 flex-col">
+            <div className="flex w-9/12 flex-col">
                 <div className="mt-0">
                     <span className="text-black text-4xl font-black">今日已花費：2000 元</span>
                 </div>
