@@ -1,5 +1,8 @@
 import {ItemContentProps} from "@/app/data/ItemContentProps";
 import {TransactionType} from "@/app/data/TransactionType";
+import {firestore} from "@/app/lib/FirebaseConfig";
+import {collection, getDocs} from "firebase/firestore/lite";
+import {User} from "@/app/data/user/UserDataModel";
 
 export function fetchSpendingList(): ItemContentProps[] {
     return [
@@ -74,4 +77,24 @@ export function fetchSpendingList(): ItemContentProps[] {
             desc: '在餐廳吃晚餐'
         }
     ]
+}
+
+export async function fetchFirebaseStoreData(): Promise<User[]> {
+    const usersCollection = collection(firestore, 'users')
+    const usersSnapshot = await getDocs(usersCollection)
+    const users: User[] = []
+
+    usersSnapshot.forEach((doc) => {
+        const userData = doc.data()
+        console.log("native Data")
+        console.log(userData)
+        const user: User = {
+            name: userData.name,
+        };
+        console.log("user data")
+        console.log(user)
+        users.push(user)
+    })
+
+    return users
 }
