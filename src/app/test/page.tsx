@@ -16,6 +16,7 @@ export default function Page() {
         const fetchData = async () => {
             try {
                 const data = await fetchFirebaseStoreData();
+                console.error('Error fetching data:', data);
                 setUsers(data[0]);
             } catch (error) {
                 console.error('Error fetching data:', error);
