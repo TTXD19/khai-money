@@ -1,8 +1,9 @@
 import {ItemContentProps} from "@/app/data/ItemContentProps";
 import {TransactionType} from "@/app/data/TransactionType";
 import {firestore} from "@/app/lib/FirebaseConfig";
-import {collection, getDocs} from "firebase/firestore/lite";
+import {collection, getDocs} from "firebase/firestore";
 import {User} from "@/app/data/user/UserDataModel";
+import {addDoc, doc, getDoc} from "@firebase/firestore";
 
 export function fetchSpendingList(): ItemContentProps[] {
     return [
@@ -83,18 +84,47 @@ export async function fetchFirebaseStoreData(): Promise<User[]> {
     const usersCollection = collection(firestore, 'users')
     const usersSnapshot = await getDocs(usersCollection)
     const users: User[] = []
-
+    if (usersSnapshot.size === 0) {
+        const user: User = {
+            userName: "Empty",
+        };
+        users.push(user)
+        return users
+    }
     usersSnapshot.forEach((doc) => {
         const userData = doc.data()
-        console.log("native Data")
-        console.log(userData)
+        console.warn("native Data:", userData);
         const user: User = {
-            name: userData.name,
+            userName: userData.userName,
         };
-        console.log("user data")
-        console.log(user)
+        console.warn("user data:", user);
         users.push(user)
     })
 
-    return users
+
+    return users;
+}
+
+export async function fetchUser(userId: string): Promise<User | string> {
+    try {
+        const userDocRef = doc(firestore, 'users', userId);
+        const userDocSnap = await getDoc(userDocRef)
+        if (userDocSnap.exists()) {
+            const userData = userDocSnap.data();
+            if (userData && userData.userName) {
+                return {
+                    userName: userData.userName,
+                };
+            } else {
+                console.warn("userName is missing in the user document:", "FaaSMLfza6zm98TG0Gig");
+                return "cant find user";
+            }
+        } else {
+            console.warn("No such document with userId:", "Ar83KFCgL0dI4xlsff7W");
+            return "cant find user";
+        }
+    } catch (error) {
+        console.error("Error fetching user:", error);
+        return "cant find user";
+    }
 }
