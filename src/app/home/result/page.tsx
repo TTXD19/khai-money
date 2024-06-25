@@ -1,14 +1,44 @@
 'use client';
 import ItemHeader from "@/app/component/result/item_header";
 import ItemContent from "@/app/component/result/item_content";
-import {fetchUserTransactions} from "@/app/data/result/Result";
-import {useEffect, useState} from "react";
+import {fetchUserTransactions} from "@/app/data/dashboard/Transactions";
+import {updateUserPrompt} from "@/app/data/dashboard/Prompt"
+import {Suspense, useEffect, useState} from "react";
 import {TransactionContents} from "@/app/data/transactions/TransactionContents";
 
 export default function Page() {
 
     const [transactions, setTransactions] = useState<TransactionContents[]>([]);
     const [error, setError] = useState<string | null>(null);
+    const [prompt, setPrompt] = useState('');
+
+    const handleInputChange = (event) => {
+        setPrompt(event.target.value); // Update state with input value
+    };
+
+    const updatePrompt = async () => {
+        console.log("Start to update prompt");
+        const isSuccess = await updateUserPrompt("Ar83KFCgL0dI4xlsff7W", prompt);
+        console.warn("Prepare to reload page");
+        if (isSuccess) {
+            const updatedTransactions = await fetchUserTransactions("Ar83KFCgL0dI4xlsff7W");
+            if (typeof updatedTransactions === 'string') {
+                console.warn("Reload Failed");
+                setError(updatedTransactions);
+            } else {
+                console.warn("Reload Success");
+                setTransactions(updatedTransactions);
+            }
+        } else {
+            console.warn("Prompt update failed");
+        }
+    };
+
+    const updatePromptTest = async () => {
+        // Call updateUserPrompt with userId and prompt state
+        console.log("Start to update prompt test");
+    };
+
 
     useEffect(() => {
         const fetchData = async () => {
@@ -60,8 +90,13 @@ export default function Page() {
                     </div>
                     <div className="flex mt-8">
                         <input className="flex flex-grow border border-gray-300 rounded-md ps-1.5 py-1.5" type="text"
-                               placeholder="你可以試試：我今天買了買當勞歡樂套餐總共120元"/>
-                        <button className="ps-3.5 pe-3.5 pt-2.5 pb-2.5 ms-5 bg-black text-white rounded-md">新增
+                               placeholder="你可以試試：我今天買了買當勞歡樂套餐總共120元"
+                               value={prompt}
+                               onChange={handleInputChange}
+                        />
+                        <button className="ps-3.5 pe-3.5 pt-2.5 pb-2.5 ms-5 bg-black text-white rounded-md"
+                                onClick={updatePrompt}>
+                            新增
                         </button>
                     </div>
                 </div>

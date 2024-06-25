@@ -1,6 +1,6 @@
 'use client';
 import ItemContent from "@/app/component/result/item_content";
-import {fetchFirebaseStoreData, fetchUser, writeData} from "@/app/data/result/Result";
+import {fetchFirebaseStoreData, fetchUser, writeData} from "@/app/data/dashboard/Transactions";
 import {useEffect, useState} from "react";
 import {User} from "@/app/data/user/UserDataModel";
 

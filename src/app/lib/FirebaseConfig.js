@@ -25,7 +25,6 @@ const firebaseConfig = {
 
 let firestore;
 let functions;
-
 if (typeof window !== 'undefined') {
     const app = initializeApp(firebaseConfig);
     firestore = getFirestore(app);
